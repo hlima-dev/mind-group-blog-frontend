@@ -5,7 +5,11 @@ const UPLOADS_BASE = 'http://localhost:3000/uploads';
 
 export function getBannerUrl(filename: string | null): string | null {
   if (!filename) return null;
-  return `${UPLOADS_BASE}/${filename}`;
+  // Compatibilidade: se já vier uma URL completa ou com prefixo de pasta, usa direto
+  if (filename.startsWith('http')) return filename;
+  // Remove eventual prefixo "uploads/" gravado por versões antigas
+  const clean = filename.replace(/^uploads\//, '');
+  return `${UPLOADS_BASE}/${clean}`;
 }
 
 export const articleService = {
