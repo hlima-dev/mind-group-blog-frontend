@@ -1,11 +1,14 @@
 import api from './api';
 import { Article, ArticleFormData } from '../types';
 
-const UPLOADS_BASE = 'http://localhost:3000/uploads';
+// Deriva a base de uploads da mesma variável usada pelo Axios,
+// garantindo que imagens apontem para o servidor correto em qualquer ambiente.
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const UPLOADS_BASE = `${API_URL}/uploads`;
 
 export function getBannerUrl(filename: string | null): string | null {
   if (!filename) return null;
-  // Compatibilidade: se já vier uma URL completa ou com prefixo de pasta, usa direto
+  // Compatibilidade: se já vier uma URL completa, usa direto
   if (filename.startsWith('http')) return filename;
   // Remove eventual prefixo "uploads/" gravado por versões antigas
   const clean = filename.replace(/^uploads\//, '');
@@ -38,11 +41,11 @@ export const articleService = {
 
   async update(id: string, formData: Partial<ArticleFormData>): Promise<Article> {
     const body = new FormData();
-    if (formData.title)    body.append('title', formData.title);
-    if (formData.summary)  body.append('summary', formData.summary);
-    if (formData.content)  body.append('content', formData.content);
-    if (formData.category) body.append('category', formData.category);
-    if (formData.tags)     body.append('tags', JSON.stringify(formData.tags));
+    if (formData.title)       body.append('title', formData.title);
+    if (formData.summary)     body.append('summary', formData.summary);
+    if (formData.content)     body.append('content', formData.content);
+    if (formData.category)    body.append('category', formData.category);
+    if (formData.tags)        body.append('tags', JSON.stringify(formData.tags));
     if (formData.bannerImage) body.append('bannerImage', formData.bannerImage);
     const { data } = await api.put<Article>(`/articles/${id}`, body);
     return data;
