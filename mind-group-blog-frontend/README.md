@@ -1,91 +1,184 @@
 # Mind Group Blog — Frontend
 
-Frontend desenvolvido para o case de estágio da Mind Group, simulando uma plataforma de publicação de artigos com autenticação, listagem, criação, edição e exclusão de posts.
+Frontend desenvolvido para o case de estágio da Mind Group, simulando uma plataforma completa de publicação de artigos com autenticação, gerenciamento de posts e upload de imagens em nuvem.
 
-## Tecnologias
+---
 
+# Demonstração Online
+
+## Frontend
+https://mind-group-blog-frontend.vercel.app
+
+## Backend API
+https://mind-group-blog-api.onrender.com
+
+---
+
+# Arquitetura do Projeto
+
+O projeto utiliza arquitetura FULLSTACK moderna com deploy em nuvem:
+
+- Frontend hospedado na Vercel
+- Backend hospedado no Render
+- Banco de dados MySQL hospedado no Aiven
+- Upload permanente de imagens utilizando Cloudinary
+
+---
+
+# Tecnologias Utilizadas
+
+## Frontend
 - React
 - Vite
 - TypeScript
 - Axios
 - CSS
-- Vercel
+- React Router DOM
 
-## Funcionalidades
+## Backend
+- Node.js
+- Express
+- TypeScript
+- MySQL2
+- JWT Authentication
+- Multer
+- Cloudinary
+
+## Infraestrutura
+- Vercel
+- Render
+- Aiven MySQL
+- Cloudinary
+- GitHub
+
+---
+
+# Funcionalidades
 
 - Cadastro de usuários
-- Login
+- Login com autenticação JWT
+- Persistência de sessão
 - Listagem de artigos
-- Visualização de artigo
-- Criação de artigo
-- Edição de artigo
-- Exclusão de artigo
-- Upload de imagem/banner
-- Integração com API Node.js
+- Visualização completa de artigos
+- Criação de artigos
+- Edição de artigos
+- Exclusão de artigos
+- Upload de banner/imagens
+- Upload permanente em nuvem via Cloudinary
+- Integração completa com API REST
+- Rotas SPA configuradas para Vercel
+- Backend conectado em banco MySQL cloud
 
-## Screenshots
+---
 
-### Home
-![Home](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/mind-group-blog-frontend/assets/screenshots/home.png)
+# Screenshots
 
-### Login
-![Login](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/mind-group-blog-frontend/assets/screenshots/login.png)
+## Home
+![Home](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/mind-group-blog-frontend/assets/screenshots/home.png.jpeg)
 
-### Criar artigo
-![Criar artigo](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/mind-group-blog-frontend/assets/screenshots/create-article.png)
+## Login
+![Login](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/mind-group-blog-frontend/assets/screenshots/login.png.jpeg)
 
-### Artigo
-![Artigo](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/mind-group-blog-frontend/assets/screenshots/article.png)
+## Criar artigo
+![Criar artigo](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/mind-group-blog-frontend/assets/screenshots/create-article.png.jpeg)
 
-## Deploy
+## Artigo
+![Artigo](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/mind-group-blog-frontend/assets/screenshots/article.png.jpeg)
 
-Frontend:  
-https://mind-group-blog-frontend.vercel.app
+---
 
-Backend:  
-https://mind-group-blog-api.onrender.com
+# Estrutura do Projeto
 
-## Variáveis de ambiente
-
-Crie um arquivo `.env` com:
-
-```env
-VITE_API_URL=http://localhost:3000
+```txt
+src/
+ ├── components/
+ ├── pages/
+ ├── routes/
+ ├── services/
+ ├── styles/
+ ├── contexts/
+ └── utils/
 ```
 
-Em produção, a variável deve ser configurada na Vercel:
+---
+
+# Variáveis de Ambiente
+
+## Frontend `.env`
 
 ```env
 VITE_API_URL=https://mind-group-blog-api.onrender.com
 ```
 
-## Executando localmente
+---
 
-Clone o projeto:
+# Executando Localmente
+
+## Clonar projeto
 
 ```bash
 git clone https://github.com/hlima-dev/mind-group-blog-frontend.git
 ```
 
-Entre na pasta do projeto:
+## Entrar na pasta
 
 ```bash
-cd mind-group-blog-frontend/mind-group-blog-frontend
+cd mind-group-blog-frontend
 ```
 
-Instale as dependências:
+## Instalar dependências
 
 ```bash
 npm install
 ```
 
-Execute o projeto:
+## Rodar projeto
 
 ```bash
 npm run dev
 ```
 
-## Autor
+---
 
-Lucas Lima Santos  
-GitHub: https://github.com/hlima-dev
+# Deploy
+
+## Frontend — Vercel
+
+Deploy automático integrado ao GitHub.
+
+## Backend — Render
+
+API Node.js hospedada no Render com integração ao banco MySQL cloud.
+
+## Banco de Dados — Aiven
+
+Banco MySQL hospedado em nuvem com SSL habilitado.
+
+## Upload de Imagens — Cloudinary
+
+As imagens dos artigos são armazenadas permanentemente na nuvem utilizando Cloudinary.
+
+---
+
+# Diferenciais Técnicos
+
+- Arquitetura FULLSTACK separada
+- API REST estruturada
+- Autenticação JWT
+- Upload em nuvem
+- Deploy profissional
+- Banco em cloud
+- Integração frontend/backend
+- Persistência de sessão
+- Tratamento de erros
+- Configuração SPA para Vercel
+- Projeto responsivo
+
+---
+
+# Autor
+
+Lucas Lima Santos
+
+GitHub:
+https://github.com/hlima-dev
