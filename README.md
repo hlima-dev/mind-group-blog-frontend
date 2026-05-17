@@ -2,7 +2,9 @@
 
 Frontend desenvolvido para o case de estágio da Mind Group, simulando uma plataforma de publicação de artigos com autenticação, listagem, criação, edição e exclusão de posts.
 
-## Tecnologias
+---
+
+# Tecnologias
 
 - React
 - Vite
@@ -11,7 +13,9 @@ Frontend desenvolvido para o case de estágio da Mind Group, simulando uma plata
 - CSS
 - Vercel
 
-## Funcionalidades
+---
+
+# Funcionalidades
 
 - Cadastro de usuários
 - Login
@@ -23,21 +27,35 @@ Frontend desenvolvido para o case de estágio da Mind Group, simulando uma plata
 - Upload de imagem/banner
 - Integração com API Node.js
 
-## Screenshots
+---
 
-### Home
-![Home](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/mind-group-blog-frontend/assets/screenshots/home.png)
+# Screenshots
 
-### Login
-![Login](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/mind-group-blog-frontend/assets/screenshots/login.png)
+## Home
 
-### Criar artigo
-![Criar artigo](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/mind-group-blog-frontend/assets/screenshots/create-article.png)
+![Home](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/frontend%20de%20blog%20de%20grupo%20mental/assets/screenshots/home.png)
 
-### Artigo
-![Artigo](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/mind-group-blog-frontend/assets/screenshots/article.png)
+---
 
-## Deploy
+## Login
+
+![Login](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/frontend%20de%20blog%20de%20grupo%20mental/assets/screenshots/login.png)
+
+---
+
+## Criar artigo
+
+![Criar artigo](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/frontend%20de%20blog%20de%20grupo%20mental/assets/screenshots/create-article.png)
+
+---
+
+## Artigo
+
+![Artigo](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/frontend%20de%20blog%20de%20grupo%20mental/assets/screenshots/article.png)
+
+---
+
+# Deploy
 
 Frontend:  
 https://mind-group-blog-frontend.vercel.app
@@ -45,7 +63,9 @@ https://mind-group-blog-frontend.vercel.app
 Backend:  
 https://mind-group-blog-api.onrender.com
 
-## Variáveis de ambiente
+---
+
+# Variáveis de ambiente
 
 Crie um arquivo `.env` com:
 
@@ -53,13 +73,15 @@ Crie um arquivo `.env` com:
 VITE_API_URL=http://localhost:3000
 ```
 
-Em produção, a variável deve ser configurada na Vercel:
+Em produção, configure na Vercel:
 
 ```env
 VITE_API_URL=https://mind-group-blog-api.onrender.com
 ```
 
-## Executando localmente
+---
+
+# Executando localmente
 
 Clone o projeto:
 
@@ -67,10 +89,10 @@ Clone o projeto:
 git clone https://github.com/hlima-dev/mind-group-blog-frontend.git
 ```
 
-Entre na pasta do projeto:
+Entre na pasta:
 
 ```bash
-cd mind-group-blog-frontend/mind-group-blog-frontend
+cd "frontend de blog de grupo mental"
 ```
 
 Instale as dependências:
@@ -79,13 +101,15 @@ Instale as dependências:
 npm install
 ```
 
-Execute o projeto:
+Execute:
 
 ```bash
 npm run dev
 ```
 
-## Autor
+---
+
+# Autor
 
 Lucas Lima Santos  
 GitHub: https://github.com/hlima-dev
