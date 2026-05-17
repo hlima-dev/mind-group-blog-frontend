@@ -53,6 +53,12 @@ Crie um arquivo `.env` com:
 VITE_API_URL=http://localhost:3000
 ```
 
+Em produção, a variável deve ser configurada na Vercel:
+
+```env
+VITE_API_URL=https://mind-group-blog-api.onrender.com
+```
+
 ## Executando localmente
 
 Clone o projeto:
@@ -61,10 +67,10 @@ Clone o projeto:
 git clone https://github.com/hlima-dev/mind-group-blog-frontend.git
 ```
 
-Entre na pasta:
+Entre na pasta do projeto:
 
 ```bash
-cd mind-group-blog-frontend
+cd mind-group-blog-frontend/mind-group-blog-frontend
 ```
 
 Instale as dependências:
