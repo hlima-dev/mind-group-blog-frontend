@@ -23,6 +23,20 @@ Frontend desenvolvido para o case de estágio da Mind Group, simulando uma plata
 - Upload de imagem/banner
 - Integração com API Node.js
 
+## Screenshots
+
+### Página inicial
+![Home](./public/screenshots/home.png)
+
+### Login
+![Login](./public/screenshots/login.png)
+
+### Criar artigo
+![Create Article](./public/screenshots/create-article.png)
+
+### Visualização do artigo
+![Article](./public/screenshots/article.png)
+
 ## Deploy
 
 Frontend:
