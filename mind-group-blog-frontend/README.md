@@ -26,16 +26,16 @@ Frontend desenvolvido para o case de estágio da Mind Group, simulando uma plata
 ## Screenshots
 
 ### Página inicial
-![Home](./public/screenshots/home.png)
+![Home](./mind-group-blog-frontend/assets/screenshots/home.png)
 
 ### Login
-![Login](./public/screenshots/login.png)
+![Login](./mind-group-blog-frontend/assets/screenshots/login.png)
 
 ### Criar artigo
-![Create Article](./public/screenshots/create-article.png)
+![Create Article](./mind-group-blog-frontend/assets/screenshots/create-article.png)
 
 ### Visualização do artigo
-![Article](./public/screenshots/article.png)
+![Article](./mind-group-blog-frontend/assets/screenshots/article.png)
 
 ## Deploy
 
