@@ -29,29 +29,19 @@ Frontend desenvolvido para o case de estágio da Mind Group, simulando uma plata
 
 ---
 
-# Screenshots
+## Screenshots
 
-## Home
+### Home
+![Home](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/mind-group-blog-frontend/assets/screenshots/home.png.jpeg)
 
-![Home](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/frontend%20de%20blog%20de%20grupo%20mental/assets/screenshots/home.png)
+### Login
+![Login](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/mind-group-blog-frontend/assets/screenshots/login.png.jpeg)
 
----
+### Criar artigo
+![Criar artigo](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/mind-group-blog-frontend/assets/screenshots/create-article.png.jpeg)
 
-## Login
-
-![Login](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/frontend%20de%20blog%20de%20grupo%20mental/assets/screenshots/login.png)
-
----
-
-## Criar artigo
-
-![Criar artigo](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/frontend%20de%20blog%20de%20grupo%20mental/assets/screenshots/create-article.png)
-
----
-
-## Artigo
-
-![Artigo](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/frontend%20de%20blog%20de%20grupo%20mental/assets/screenshots/article.png)
+### Artigo
+![Artigo](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/mind-group-blog-frontend/assets/screenshots/article.png.jpeg)
 
 ---
 
