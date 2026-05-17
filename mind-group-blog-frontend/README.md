@@ -1,64 +1,39 @@
 # Mind Group Blog — Frontend
 
-Interface web do sistema de blog, construída com **React + TypeScript + Vite + TailwindCSS**.
+Frontend desenvolvido para o case de estágio da Mind Group, simulando uma plataforma de publicação de artigos com autenticação, listagem, criação, edição e exclusão de posts.
 
-## Stack
+## Tecnologias
 
-| Tecnologia | Uso |
-|---|---|
-| React 18 + TypeScript | UI declarativa tipada |
-| Vite | Build e dev server ultrarrápido |
-| TailwindCSS | Estilização utility-first |
-| React Router DOM v6 | Navegação SPA |
-| Axios | HTTP client com interceptors JWT |
-| React Hot Toast | Notificações contextuais |
-| Lucide React | Ícones |
+- React
+- Vite
+- TypeScript
+- Axios
+- CSS
+- Vercel
 
-## Pré-requisito
+## Funcionalidades
 
-- Node.js 18+
-- Backend rodando em `http://localhost:3000`
+- Cadastro de usuários
+- Login
+- Listagem de artigos
+- Visualização de artigo
+- Criação de artigo
+- Edição de artigo
+- Exclusão de artigo
+- Upload de imagem/banner
+- Integração com API Node.js
 
-## Rodar o projeto
+## Deploy
 
-```bash
-npm install
-npm run dev
-```
+Frontend:
+https://mind-group-blog-frontend.vercel.app
 
-Acesse: http://localhost:5173
+Backend:
+https://mind-group-blog-api.onrender.com
 
-## Build para produção
+## Variáveis de ambiente
 
-```bash
-npm run build
-npm run preview
-```
+Crie um arquivo `.env` com:
 
-## Estrutura
-
-```
-src/
-├── components/        # Navbar, Footer, ArticleCard, ArticleForm, DeleteModal, Spinner
-├── contexts/          # AuthContext (JWT + user state)
-├── layouts/           # MainLayout (Navbar + Outlet + Footer)
-├── pages/             # Home, Login, Register, Articles, ArticleDetail,
-│                      # Dashboard, CreateArticle, EditArticle, Profile, NotFound
-├── routes/            # PrivateRoute (guard de autenticação)
-├── services/          # api.ts (Axios + interceptors), auth.service.ts, article.service.ts
-└── types/             # Interfaces TypeScript compartilhadas
-```
-
-## Páginas
-
-| Rota | Página | Acesso |
-|---|---|---|
-| `/` | Home | Público |
-| `/login` | Login | Público |
-| `/register` | Cadastro | Público |
-| `/articles` | Lista de artigos | Público |
-| `/articles/:id` | Detalhe do artigo | Público |
-| `/dashboard` | Dashboard pessoal | 🔒 JWT |
-| `/articles/new` | Criar artigo | 🔒 JWT |
-| `/articles/:id/edit` | Editar artigo | 🔒 JWT |
-| `/profile` | Perfil | 🔒 JWT |
+```env
+VITE_API_URL=http://localhost:3000
