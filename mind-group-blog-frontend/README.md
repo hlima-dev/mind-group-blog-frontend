@@ -25,17 +25,17 @@ Frontend desenvolvido para o case de estágio da Mind Group, simulando uma plata
 
 ## Screenshots
 
-### Página inicial
+### Home
 ![Home](./mind-group-blog-frontend/assets/screenshots/home.png)
 
 ### Login
 ![Login](./mind-group-blog-frontend/assets/screenshots/login.png)
 
 ### Criar artigo
-![Create Article](./mind-group-blog-frontend/assets/screenshots/create-article.png)
+![Criar artigo](./mind-group-blog-frontend/assets/screenshots/create-article.png)
 
-### Visualização do artigo
-![Article](./mind-group-blog-frontend/assets/screenshots/article.png)
+### Artigo
+![Artigo](./mind-group-blog-frontend/assets/screenshots/article.png)
 
 ## Deploy
 
@@ -51,3 +51,35 @@ Crie um arquivo `.env` com:
 
 ```env
 VITE_API_URL=http://localhost:3000
+```
+
+## Executando localmente
+
+Clone o projeto:
+
+```bash
+git clone https://github.com/hlima-dev/mind-group-blog-frontend.git
+```
+
+Entre na pasta:
+
+```bash
+cd mind-group-blog-frontend
+```
+
+Instale as dependências:
+
+```bash
+npm install
+```
+
+Execute o projeto:
+
+```bash
+npm run dev
+```
+
+## Autor
+
+Lucas Lima Santos  
+GitHub: https://github.com/hlima-dev
