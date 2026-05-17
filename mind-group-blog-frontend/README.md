@@ -26,23 +26,23 @@ Frontend desenvolvido para o case de estágio da Mind Group, simulando uma plata
 ## Screenshots
 
 ### Home
-![Home](./mind-group-blog-frontend/assets/screenshots/home.png)
+![Home](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/mind-group-blog-frontend/assets/screenshots/home.png)
 
 ### Login
-![Login](./mind-group-blog-frontend/assets/screenshots/login.png)
+![Login](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/mind-group-blog-frontend/assets/screenshots/login.png)
 
 ### Criar artigo
-![Criar artigo](./mind-group-blog-frontend/assets/screenshots/create-article.png)
+![Criar artigo](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/mind-group-blog-frontend/assets/screenshots/create-article.png)
 
 ### Artigo
-![Artigo](./mind-group-blog-frontend/assets/screenshots/article.png)
+![Artigo](https://raw.githubusercontent.com/hlima-dev/mind-group-blog-frontend/main/mind-group-blog-frontend/assets/screenshots/article.png)
 
 ## Deploy
 
-Frontend:
+Frontend:  
 https://mind-group-blog-frontend.vercel.app
 
-Backend:
+Backend:  
 https://mind-group-blog-api.onrender.com
 
 ## Variáveis de ambiente
