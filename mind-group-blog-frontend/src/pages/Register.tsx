@@ -14,11 +14,14 @@ export function Register() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password.length < 6) { toast.error('A senha deve ter ao menos 6 caracteres.'); return; }
+    if (password.length < 8 || !/[A-Z]/.test(password) || !/[0-9]/.test(password)) {
+      toast.error('A senha deve ter ao menos 8 caracteres, uma letra maiúscula e um número.');
+      return;
+    }
     setLoading(true);
     try {
       await authService.register(name, email, password);
-      toast.success('Conta criada! Faça login para continuar.');
+      toast.success('Conta criada! Verifique seu e-mail para confirmar a conta, depois faça login.');
       navigate('/login');
     } catch (err: unknown) {
       const msg = (err as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Erro ao cadastrar.';
@@ -55,7 +58,7 @@ export function Register() {
                 <input
                   type={showPass ? 'text' : 'password'}
                   className="input pr-12"
-                  placeholder="Mínimo 6 caracteres"
+                  placeholder="Mínimo 8 caracteres, 1 maiúscula e 1 número"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required

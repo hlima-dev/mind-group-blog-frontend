@@ -17,8 +17,8 @@ export function Login() {
     e.preventDefault();
     setLoading(true);
     try {
-      const { token, user } = await authService.login(email, password);
-      login(token, user);
+      const { token, refreshToken, user } = await authService.login(email, password);
+      login(token, refreshToken, user);
       toast.success(`Bem-vindo de volta, ${user.name.split(' ')[0]}!`);
       navigate('/dashboard');
     } catch (err: unknown) {
@@ -56,7 +56,12 @@ export function Login() {
               />
             </div>
             <div>
-              <label className="label">Senha</label>
+              <div className="flex items-center justify-between">
+                <label className="label">Senha</label>
+                <Link to="/forgot-password" className="text-xs text-cyan-400 hover:text-cyan-300 transition-colors">
+                  Esqueci minha senha
+                </Link>
+              </div>
               <div className="relative">
                 <input
                   type={showPass ? 'text' : 'password'}

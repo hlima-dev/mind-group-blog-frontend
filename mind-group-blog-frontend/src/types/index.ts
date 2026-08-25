@@ -20,6 +20,7 @@ export interface Article {
 
 export interface AuthResponse {
   token: string;
+  refreshToken: string;
   user: User;
 }
 

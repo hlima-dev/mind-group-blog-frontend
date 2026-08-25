@@ -1,11 +1,12 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { User } from '../types';
+import { authService } from '../services/auth.service';
 
 interface AuthContextType {
   user: User | null;
   token: string | null;
-  login: (token: string, user: User) => void;
-  logout: () => void;
+  login: (token: string, refreshToken: string, user: User) => void;
+  logout: () => Promise<void>;
   isAuthenticated: boolean;
 }
 
@@ -24,15 +25,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const login = (tk: string, u: User) => {
+  const login = (tk: string, refreshToken: string, u: User) => {
     localStorage.setItem('mg_token', tk);
+    localStorage.setItem('mg_refresh_token', refreshToken);
     localStorage.setItem('mg_user', JSON.stringify(u));
     setToken(tk);
     setUser(u);
   };
 
-  const logout = () => {
+  // Os tokens são revogados no servidor antes de limpar localmente —
+  // sem isso, o refresh token continuava válido mesmo depois do "logout".
+  const logout = async () => {
+    await authService.logout();
     localStorage.removeItem('mg_token');
+    localStorage.removeItem('mg_refresh_token');
     localStorage.removeItem('mg_user');
     setToken(null);
     setUser(null);
