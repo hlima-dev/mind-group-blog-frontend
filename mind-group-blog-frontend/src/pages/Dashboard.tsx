@@ -18,7 +18,7 @@ export function Dashboard() {
   const load = () => {
     articleService.listMine({ page: 1, limit: 50 }).then(({ data }) =>
       setArticles(data)
-    ).finally(() => setLoading(false));
+    ).catch(() => {}).finally(() => setLoading(false));
   };
 
   useEffect(() => { load(); }, []);

@@ -28,7 +28,7 @@ export function Profile() {
   useEffect(() => {
     articleService.listMine({ page: 1, limit: 50 }).then(({ data }) =>
       setArticles(data)
-    ).finally(() => setLoading(false));
+    ).catch(() => {}).finally(() => setLoading(false));
   }, [user]);
 
   const handleSaveName = async (e: React.FormEvent) => {

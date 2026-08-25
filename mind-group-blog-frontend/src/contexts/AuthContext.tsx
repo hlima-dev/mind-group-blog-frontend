@@ -19,10 +19,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const storedToken = localStorage.getItem('mg_token');
+    const storedRefreshToken = localStorage.getItem('mg_refresh_token');
     const storedUser = localStorage.getItem('mg_user');
+
+    // Sessão de antes do refresh token existir (só tinha mg_token) — não dá
+    // pra renovar, então melhor encerrar aqui do que deixar a primeira
+    // chamada autenticada cair no 401 e forçar um reload de tela.
+    if (storedToken && !storedRefreshToken) {
+      localStorage.removeItem('mg_token');
+      localStorage.removeItem('mg_user');
+      return;
+    }
+
     if (storedToken && storedUser) {
-      setToken(storedToken);
-      setUser(JSON.parse(storedUser));
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        setToken(storedToken);
+        setUser(parsedUser);
+      } catch {
+        localStorage.removeItem('mg_token');
+        localStorage.removeItem('mg_refresh_token');
+        localStorage.removeItem('mg_user');
+      }
     }
   }, []);
 

@@ -11,7 +11,7 @@ export function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    articleService.list({ limit: 9 }).then(({ data }) => setArticles(data)).finally(() => setLoading(false));
+    articleService.list({ limit: 9 }).then(({ data }) => setArticles(data)).catch(() => {}).finally(() => setLoading(false));
   }, []);
 
   const featured = articles.slice(0, 3);

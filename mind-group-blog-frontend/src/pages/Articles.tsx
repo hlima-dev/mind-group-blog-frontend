@@ -33,6 +33,7 @@ export function Articles() {
         setArticles(data);
         setPagination(p);
       })
+      .catch(() => {})
       .finally(() => setLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, category, search]);
