@@ -1,5 +1,5 @@
 import api from './api';
-import { Article, ArticleFormData } from '../types';
+import { Article, ArticleFormData, ArticleListParams, PaginatedArticles } from '../types';
 
 // Deriva a base de uploads da mesma variável usada pelo Axios,
 // garantindo que imagens apontem para o servidor correto em qualquer ambiente.
@@ -15,10 +15,26 @@ export function getBannerUrl(filename: string | null): string | null {
   return `${UPLOADS_BASE}/${clean}`;
 }
 
+function buildFormData(formData: Partial<ArticleFormData>): FormData {
+  const body = new FormData();
+  if (formData.title !== undefined)    body.append('title', formData.title);
+  if (formData.summary !== undefined)  body.append('summary', formData.summary);
+  if (formData.content !== undefined)  body.append('content', formData.content);
+  if (formData.category !== undefined) body.append('category', formData.category);
+  if (formData.status !== undefined)   body.append('status', formData.status);
+  if (formData.tags !== undefined)     body.append('tags', JSON.stringify(formData.tags));
+  if (formData.bannerImage)            body.append('bannerImage', formData.bannerImage);
+  return body;
+}
+
 export const articleService = {
-  async list(category?: string): Promise<Article[]> {
-    const params = category ? { category } : {};
-    const { data } = await api.get<Article[]>('/articles', { params });
+  async list(params: ArticleListParams = {}): Promise<PaginatedArticles> {
+    const { data } = await api.get<PaginatedArticles>('/articles', { params });
+    return data;
+  },
+
+  async listMine(params: ArticleListParams = {}): Promise<PaginatedArticles> {
+    const { data } = await api.get<PaginatedArticles>('/articles/mine', { params });
     return data;
   },
 
@@ -28,30 +44,21 @@ export const articleService = {
   },
 
   async create(formData: ArticleFormData): Promise<Article> {
-    const body = new FormData();
-    body.append('title', formData.title);
-    body.append('summary', formData.summary);
-    body.append('content', formData.content);
-    body.append('category', formData.category);
-    body.append('tags', JSON.stringify(formData.tags));
-    if (formData.bannerImage) body.append('bannerImage', formData.bannerImage);
-    const { data } = await api.post<Article>('/articles', body);
+    const { data } = await api.post<Article>('/articles', buildFormData(formData));
     return data;
   },
 
   async update(id: string, formData: Partial<ArticleFormData>): Promise<Article> {
-    const body = new FormData();
-    if (formData.title)       body.append('title', formData.title);
-    if (formData.summary)     body.append('summary', formData.summary);
-    if (formData.content)     body.append('content', formData.content);
-    if (formData.category)    body.append('category', formData.category);
-    if (formData.tags)        body.append('tags', JSON.stringify(formData.tags));
-    if (formData.bannerImage) body.append('bannerImage', formData.bannerImage);
-    const { data } = await api.put<Article>(`/articles/${id}`, body);
+    const { data } = await api.put<Article>(`/articles/${id}`, buildFormData(formData));
     return data;
   },
 
   async delete(id: string): Promise<void> {
     await api.delete(`/articles/${id}`);
+  },
+
+  async toggleLike(id: string): Promise<{ liked: boolean; likesCount: number }> {
+    const { data } = await api.post(`/articles/${id}/like`);
+    return data;
   },
 };

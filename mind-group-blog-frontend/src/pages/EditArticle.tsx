@@ -69,6 +69,7 @@ export function EditArticle() {
             content: article.content,
             category: article.category,
             tags: article.tags,
+            status: article.status,
           }}
           onSubmit={handleSubmit}
           loading={saving}

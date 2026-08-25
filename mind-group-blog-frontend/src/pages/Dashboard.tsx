@@ -16,8 +16,8 @@ export function Dashboard() {
   const [deleting, setDeleting] = useState(false);
 
   const load = () => {
-    articleService.list().then((all) =>
-      setArticles(all.filter((a) => a.authorId === user?.id))
+    articleService.listMine({ page: 1, limit: 50 }).then(({ data }) =>
+      setArticles(data)
     ).finally(() => setLoading(false));
   };
 
@@ -38,8 +38,9 @@ export function Dashboard() {
     }
   };
 
-  const categories = [...new Set(articles.map((a) => a.category))].length;
-  const totalTags = [...new Set(articles.flatMap((a) => a.tags))].length;
+  const published = articles.filter((a) => a.status === 'published').length;
+  const drafts = articles.filter((a) => a.status === 'draft').length;
+  const totalViews = articles.reduce((sum, a) => sum + a.views, 0);
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
@@ -59,10 +60,10 @@ export function Dashboard() {
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
         {[
-          { label: 'Artigos publicados', value: articles.length, icon: BookOpen, color: 'text-cyan-400' },
-          { label: 'Categorias', value: categories, icon: BarChart2, color: 'text-violet-400' },
-          { label: 'Tags únicas', value: totalTags, icon: Tag, color: 'text-emerald-400' },
-          { label: 'Último artigo', value: articles.length > 0 ? new Date(articles[0].createdAt).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' }) : '—', icon: Calendar, color: 'text-amber-400' },
+          { label: 'Artigos publicados', value: published, icon: BookOpen, color: 'text-cyan-400' },
+          { label: 'Rascunhos', value: drafts, icon: Tag, color: 'text-amber-400' },
+          { label: 'Visualizações totais', value: totalViews, icon: BarChart2, color: 'text-violet-400' },
+          { label: 'Último artigo', value: articles.length > 0 ? new Date(articles[0].createdAt).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' }) : '—', icon: Calendar, color: 'text-emerald-400' },
         ].map(({ label, value, icon: Icon, color }) => (
           <div key={label} className="card p-5">
             <Icon size={18} className={`${color} mb-3`} />
@@ -99,8 +100,13 @@ export function Dashboard() {
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-medium text-white truncate group-hover:text-cyan-400 transition-colors text-sm">
+                    <h3 className="font-medium text-white truncate group-hover:text-cyan-400 transition-colors text-sm flex items-center gap-2">
                       {article.title}
+                      {article.status === 'draft' && (
+                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-400/15 border border-amber-400/40 text-amber-400 flex-shrink-0">
+                          RASCUNHO
+                        </span>
+                      )}
                     </h3>
                     <div className="flex items-center gap-3 mt-1">
                       <span className="text-xs text-slate-500">{article.category}</span>

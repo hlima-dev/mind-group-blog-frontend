@@ -36,4 +36,19 @@
   .animate-delay-400 { animation-delay: 400ms; }
   .animate-delay-500 { animation-delay: 500ms; }
   .opacity-0-init { opacity: 0; }
+
+  .article-body :is(h1, h2, h3) { @apply font-display font-bold text-white mt-10 mb-4; }
+  .article-body h1 { @apply text-3xl; }
+  .article-body h2 { @apply text-2xl; }
+  .article-body h3 { @apply text-xl; }
+  .article-body p { @apply mb-5; }
+  .article-body a { @apply text-cyan-400 underline underline-offset-2 hover:text-cyan-300; }
+  .article-body ul { @apply list-disc list-outside pl-5 mb-5 space-y-1.5; }
+  .article-body ol { @apply list-decimal list-outside pl-5 mb-5 space-y-1.5; }
+  .article-body blockquote { @apply border-l-2 border-cyan-400/40 pl-5 italic text-slate-400 my-6; }
+  .article-body code { @apply bg-surface-600 border border-surface-400/40 rounded px-1.5 py-0.5 text-sm text-cyan-300 font-mono; }
+  .article-body pre { @apply bg-surface-800 border border-surface-400/40 rounded-xl p-4 overflow-x-auto mb-5; }
+  .article-body pre code { @apply bg-transparent border-none p-0; }
+  .article-body img { @apply rounded-xl my-6 max-w-full; }
+  .article-body hr { @apply border-surface-400/30 my-8; }
 }

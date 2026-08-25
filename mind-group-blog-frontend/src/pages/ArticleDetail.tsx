@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 import { Article } from '../types';
 import { articleService, getBannerUrl } from '../services/article.service';
 import { useAuth } from '../contexts/AuthContext';
 import { PageLoader } from '../components/Spinner';
 import { DeleteModal } from '../components/DeleteModal';
+import { CommentSection } from '../components/CommentSection';
 import toast from 'react-hot-toast';
-import { Calendar, User, Tag, ArrowLeft, Pencil, Trash2 } from 'lucide-react';
+import { Calendar, User, Tag, ArrowLeft, Pencil, Trash2, Heart, Eye } from 'lucide-react';
 
 export function ArticleDetail() {
   const { id } = useParams<{ id: string }>();
@@ -14,7 +16,8 @@ export function ArticleDetail() {
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
-  const { user } = useAuth();
+  const [liking, setLiking] = useState(false);
+  const { user, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,6 +38,23 @@ export function ArticleDetail() {
     } catch {
       toast.error('Erro ao excluir artigo.');
       setDeleting(false);
+    }
+  };
+
+  const handleLike = async () => {
+    if (!article) return;
+    if (!isAuthenticated) {
+      toast.error('Faça login para curtir.');
+      return;
+    }
+    setLiking(true);
+    try {
+      const { liked, likesCount } = await articleService.toggleLike(article.id);
+      setArticle({ ...article, likedByMe: liked, likesCount });
+    } catch {
+      toast.error('Erro ao curtir artigo.');
+    } finally {
+      setLiking(false);
     }
   };
 
@@ -80,6 +100,11 @@ export function ArticleDetail() {
         {/* Tags / categoria */}
         <div className="flex flex-wrap items-center gap-2.5 mb-8">
           <span className="tag">{article.category}</span>
+          {article.status === 'draft' && (
+            <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-400/15 border border-amber-400/40 text-amber-400">
+              RASCUNHO — visível só para você
+            </span>
+          )}
           {article.tags.map((t) => (
             <span key={t} className="flex items-center gap-1 text-xs text-slate-500">
               <Tag size={10} />{t}
@@ -110,6 +135,20 @@ export function ArticleDetail() {
               <Calendar size={14} className="text-cyan-400" />
               {date}
             </span>
+            <span className="flex items-center gap-2">
+              <Eye size={14} className="text-cyan-400" />
+              {article.views}
+            </span>
+            <button
+              onClick={handleLike}
+              disabled={liking}
+              className={`flex items-center gap-2 transition-colors ${
+                article.likedByMe ? 'text-red-400' : 'hover:text-red-400'
+              }`}
+            >
+              <Heart size={14} fill={article.likedByMe ? 'currentColor' : 'none'} />
+              {article.likesCount}
+            </button>
           </div>
           {isAuthor && (
             <div className="flex items-center gap-2">
@@ -139,11 +178,13 @@ export function ArticleDetail() {
 
         {/* Corpo do artigo */}
         <div
-          className="text-slate-300 whitespace-pre-wrap"
+          className="article-body text-slate-300"
           style={{ fontSize: 'clamp(0.95rem, 2vw, 1.0625rem)', lineHeight: 1.85 }}
         >
-          {article.content}
+          <ReactMarkdown>{article.content}</ReactMarkdown>
         </div>
+
+        <CommentSection articleId={article.id} />
 
         {/* Rodapé da leitura */}
         <div className="mt-16 pt-8 border-t border-surface-400/20">

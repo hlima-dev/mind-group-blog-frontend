@@ -18,6 +18,7 @@ export function ArticleForm({ initial, onSubmit, loading, submitLabel }: Props) 
     content: initial?.content || '',
     category: initial?.category || '',
     tags: initial?.tags || [],
+    status: initial?.status || 'published',
     bannerImage: null,
   });
   const [tagInput, setTagInput] = useState('');
@@ -145,15 +146,44 @@ export function ArticleForm({ initial, onSubmit, loading, submitLabel }: Props) 
 
       {/* Content */}
       <div>
-        <label className="label">Conteúdo *</label>
+        <label className="label">Conteúdo * <span className="text-slate-600 font-normal">(suporta markdown)</span></label>
         <textarea
           className="input resize-y font-mono text-sm"
           rows={14}
-          placeholder="Escreva o conteúdo completo do artigo aqui..."
+          placeholder="Escreva o conteúdo completo do artigo aqui... Markdown é suportado: **negrito**, *itálico*, # títulos, ```código```, etc."
           value={form.content}
           onChange={(e) => set('content', e.target.value)}
           required
         />
+      </div>
+
+      {/* Status */}
+      <div>
+        <label className="label">Visibilidade</label>
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={() => set('status', 'published')}
+            className={`flex-1 py-2.5 rounded-xl border text-sm font-medium transition-colors ${
+              form.status === 'published'
+                ? 'bg-cyan-400/10 border-cyan-400/40 text-cyan-400'
+                : 'border-surface-400 text-slate-500 hover:border-surface-300'
+            }`}
+          >
+            Publicar agora
+          </button>
+          <button
+            type="button"
+            onClick={() => set('status', 'draft')}
+            className={`flex-1 py-2.5 rounded-xl border text-sm font-medium transition-colors ${
+              form.status === 'draft'
+                ? 'bg-amber-400/10 border-amber-400/40 text-amber-400'
+                : 'border-surface-400 text-slate-500 hover:border-surface-300'
+            }`}
+          >
+            Salvar como rascunho
+          </button>
+        </div>
       </div>
 
       <button type="submit" disabled={loading} className="btn-primary w-full py-3 text-base">

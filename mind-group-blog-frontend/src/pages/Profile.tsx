@@ -6,11 +6,11 @@ import { articleService } from '../services/article.service';
 import { authService } from '../services/auth.service';
 import { ArticleCard } from '../components/ArticleCard';
 import { PageLoader } from '../components/Spinner';
-import { User, Mail, LogOut, BookOpen, KeyRound, Eye, EyeOff } from 'lucide-react';
+import { User, Mail, LogOut, BookOpen, KeyRound, Eye, EyeOff, Pencil } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export function Profile() {
-  const { user, logout } = useAuth();
+  const { user, logout, updateUser } = useAuth();
   const navigate = useNavigate();
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
@@ -21,11 +21,38 @@ export function Profile() {
   const [showPass, setShowPass] = useState(false);
   const [changingPassword, setChangingPassword] = useState(false);
 
+  const [editingName, setEditingName] = useState(false);
+  const [name, setName] = useState(user?.name ?? '');
+  const [savingName, setSavingName] = useState(false);
+
   useEffect(() => {
-    articleService.list().then((all) =>
-      setArticles(all.filter((a) => a.authorId === user?.id))
+    articleService.listMine({ page: 1, limit: 50 }).then(({ data }) =>
+      setArticles(data)
     ).finally(() => setLoading(false));
   }, [user]);
+
+  const handleSaveName = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!user || name.trim().length < 2) {
+      toast.error('Nome deve ter ao menos 2 caracteres.');
+      return;
+    }
+
+    setSavingName(true);
+    try {
+      const updated = await authService.updateProfile(name.trim());
+      updateUser({ ...user, name: updated.name });
+      toast.success('Nome atualizado.');
+      setEditingName(false);
+    } catch (err: unknown) {
+      const msg =
+        (err as { response?: { data?: { message?: string } } })?.response?.data?.message ||
+        'Erro ao atualizar nome.';
+      toast.error(msg);
+    } finally {
+      setSavingName(false);
+    }
+  };
 
   const handleLogout = async () => {
     await logout();
@@ -70,14 +97,44 @@ export function Profile() {
           </div>
 
           <div className="flex-1">
-            <h1 className="font-display font-bold text-3xl text-white mb-1">{user.name}</h1>
+            {editingName ? (
+              <form onSubmit={handleSaveName} className="flex items-center gap-2 mb-1">
+                <input
+                  className="input py-1.5 text-lg font-display font-bold max-w-xs"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  autoFocus
+                />
+                <button type="submit" disabled={savingName} className="btn-primary px-4 py-1.5 text-sm">
+                  {savingName ? 'Salvando...' : 'Salvar'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => { setEditingName(false); setName(user.name); }}
+                  className="text-sm text-slate-500 hover:text-slate-300"
+                >
+                  Cancelar
+                </button>
+              </form>
+            ) : (
+              <h1 className="font-display font-bold text-3xl text-white mb-1 flex items-center gap-3 group">
+                {user.name}
+                <button
+                  onClick={() => setEditingName(true)}
+                  className="text-slate-600 hover:text-cyan-400 transition-colors"
+                  title="Editar nome"
+                >
+                  <Pencil size={16} />
+                </button>
+              </h1>
+            )}
             <div className="flex items-center gap-2 text-slate-400 text-sm">
               <Mail size={14} className="text-cyan-400" />
               {user.email}
             </div>
             <div className="flex items-center gap-2 mt-3 text-slate-500 text-sm">
               <BookOpen size={13} />
-              {articles.length} artigo{articles.length !== 1 ? 's' : ''} publicado{articles.length !== 1 ? 's' : ''}
+              {articles.length} artigo{articles.length !== 1 ? 's' : ''}
             </div>
           </div>
 

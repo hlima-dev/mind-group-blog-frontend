@@ -1,5 +1,5 @@
 import api from './api';
-import { AuthResponse } from '../types';
+import { AuthResponse, User } from '../types';
 
 export const authService = {
   async register(name: string, email: string, password: string): Promise<AuthResponse> {
@@ -42,6 +42,11 @@ export const authService = {
 
   async resendVerification(): Promise<{ message: string }> {
     const { data } = await api.post('/auth/resend-verification');
+    return data;
+  },
+
+  async updateProfile(name: string): Promise<User> {
+    const { data } = await api.patch('/auth/me', { name });
     return data;
   },
 };
