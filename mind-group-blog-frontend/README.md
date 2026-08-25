@@ -1,6 +1,6 @@
 # Mind Group Blog — Frontend
 
-Frontend desenvolvido para o case de estágio da Mind Group, simulando uma plataforma completa de publicação de artigos com autenticação, gerenciamento de posts e upload de imagens em nuvem.
+Frontend desenvolvido para o case de estágio da Mind Group, simulando uma plataforma completa de publicação de artigos com autenticação, gerenciamento de posts, curtidas, comentários e upload de imagens em nuvem.
 
 ---
 
@@ -12,6 +12,9 @@ https://mind-group-blog-frontend.vercel.app
 ## Backend API
 https://mind-group-blog-api.onrender.com
 
+## Documentação da API (Swagger)
+https://mind-group-blog-api.onrender.com/docs
+
 ---
 
 # Arquitetura do Projeto
@@ -22,6 +25,8 @@ O projeto utiliza arquitetura FULLSTACK moderna com deploy em nuvem:
 - Backend hospedado no Render
 - Banco de dados MySQL hospedado no Aiven
 - Upload permanente de imagens utilizando Cloudinary
+- E-mails transacionais via Resend
+- Integração contínua via GitHub Actions
 
 ---
 
@@ -31,43 +36,55 @@ O projeto utiliza arquitetura FULLSTACK moderna com deploy em nuvem:
 - React
 - Vite
 - TypeScript
+- Tailwind CSS
 - Axios
-- CSS
 - React Router DOM
+- React Markdown
+
+## Testes
+- Vitest
+- Testing Library
 
 ## Backend
 - Node.js
 - Express
 - TypeScript
 - MySQL2
-- JWT Authentication
+- JWT (access + refresh token)
+- Zod
 - Multer
 - Cloudinary
+- Resend
 
 ## Infraestrutura
 - Vercel
 - Render
 - Aiven MySQL
 - Cloudinary
-- GitHub
+- GitHub Actions
 
 ---
 
 # Funcionalidades
 
-- Cadastro de usuários
-- Login com autenticação JWT
-- Persistência de sessão
-- Listagem de artigos
-- Visualização completa de artigos
-- Criação de artigos
-- Edição de artigos
-- Exclusão de artigos
-- Upload de banner/imagens
-- Upload permanente em nuvem via Cloudinary
-- Integração completa com API REST
+## Conta
+- Cadastro e login com JWT, com renovação automática de sessão
+- Verificação de e-mail e recuperação de senha
+- Alteração de senha e edição de nome do perfil
+
+## Artigos
+- Listagem paginada, com busca e filtro por categoria
+- Criação e edição com rascunho/publicação
+- Conteúdo em markdown
+- Upload de banner via Cloudinary
+- Curtidas e contagem de visualizações
+
+## Comentários
+- Comentários com respostas aninhadas em cada artigo
+
+## Geral
 - Rotas SPA configuradas para Vercel
-- Backend conectado em banco MySQL cloud
+- Renovação de sessão transparente (refresh token)
 
 ---
 
@@ -91,13 +108,13 @@ O projeto utiliza arquitetura FULLSTACK moderna com deploy em nuvem:
 
 ```txt
 src/
- ├── components/
+ ├── components/     # ArticleCard, ArticleForm, CommentSection, etc.
  ├── pages/
  ├── routes/
- ├── services/
- ├── styles/
- ├── contexts/
- └── utils/
+ ├── services/       # api.ts, auth, artigos, comentários
+ ├── contexts/       # AuthContext
+ ├── types/
+ └── tests/          # setup dos testes
 ```
 
 ---
@@ -123,7 +140,7 @@ git clone https://github.com/hlima-dev/mind-group-blog-frontend.git
 ## Entrar na pasta
 
 ```bash
-cd mind-group-blog-frontend
+cd mind-group-blog-frontend/mind-group-blog-frontend
 ```
 
 ## Instalar dependências
@@ -136,6 +153,15 @@ npm install
 
 ```bash
 npm run dev
+```
+
+---
+
+# Testes
+
+```bash
+npm test        # roda a suíte uma vez
+npm run test:watch
 ```
 
 ---
@@ -158,18 +184,21 @@ Banco MySQL hospedado em nuvem com SSL habilitado.
 
 As imagens dos artigos são armazenadas permanentemente na nuvem utilizando Cloudinary.
 
+## CI — GitHub Actions
+
+A cada push/PR, o workflow roda os testes e o build (`.github/workflows/ci.yml`).
+
 ---
 
 # Diferenciais Técnicos
 
 - Arquitetura FULLSTACK separada
-- API REST estruturada
-- Autenticação JWT
+- API REST documentada (OpenAPI/Swagger)
+- Autenticação JWT com refresh token
+- Testes automatizados (frontend e backend) e CI
 - Upload em nuvem
 - Deploy profissional
 - Banco em cloud
-- Integração frontend/backend
-- Persistência de sessão
 - Tratamento de erros
 - Configuração SPA para Vercel
 - Projeto responsivo
